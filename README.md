@@ -47,6 +47,7 @@
 ### 环境变量配置
 
 在系统环境变量中设置：
+谷歌API秘钥可在此申请https://aistudio.google.com/apikey
 ```bash
 GOOGLE_API_KEY=your_google_api_key_here
 ```
