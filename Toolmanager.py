@@ -1,4 +1,4 @@
-import tools
+import agent_tools
 import re
 import ast
 import subprocess
@@ -16,13 +16,13 @@ class ToolManager:
     def _register_tools_from_module(self):
         """从tools模块注册工具函数"""
         # 获取tools模块中的所有函数
-        for attr_name in dir(tools):
-            attr = getattr(tools, attr_name)
+        for attr_name in dir(agent_tools):
+            attr = getattr(agent_tools, attr_name)
             # 检查是否是函数且不是私有函数，并且是在tools模块中定义的
             if (callable(attr) and 
                 not attr_name.startswith('_') and 
                 hasattr(attr, '__module__') and 
-                attr.__module__ == 'tools'):
+                attr.__module__ == "agent_tools"):
                 self.tools[attr_name] = attr
 
     def parse_action_list(self, action_list: List[Dict[str, Any]]) -> List[Tuple[str, Dict[str, Any]]]:
@@ -73,7 +73,7 @@ class ToolManager:
             Any: 函数执行结果
         """
         if func_name not in self.tools:
-            raise ValueError(f"未知的工具函数: {func_name}")
+            raise ValueError(f"未知的工具函数: {func_name}，请检查当前函数工具是否可用，名称是否正确")
         
         try:
             return self.tools[func_name](**params)

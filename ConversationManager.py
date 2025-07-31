@@ -16,6 +16,7 @@ class ConversationManager:
     def add_message(self, role: str, content: str) -> None:
         """添加消息到对话历史"""
         message = {"role": role, "parts": [{"text": content}]}
+        print(f"[对话管理] 添加消息: {role} - {content}")
         self.messages.append(message)
         
     def add_system_message(self, user_question: str, system_prompt: str) -> None:

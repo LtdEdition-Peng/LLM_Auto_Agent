@@ -8,7 +8,7 @@ from string import Template
 from typing import List, Dict, Any, Optional
 from google import genai
 from prompt_template import react_system_prompt_template
-import tools
+import agent_tools
 from Toolmanager import ToolManager
 from AgentConfig import AgentConfig
 from ConversationManager import ConversationManager
@@ -35,25 +35,20 @@ class ReactAgent:
     def render_system_prompt(self) -> str:
         """渲染系统提示模板"""
         tool_list = self.tool_manager.get_tool_list()
-        file_list = ", ".join(
-            os.path.abspath(os.path.join(self.config.project_directory, f))
-            for f in os.listdir(self.config.project_directory)
-        )
         return Template(react_system_prompt_template).substitute(
             operating_system=self.get_operating_system_name(),
             tool_list=tool_list,
-            file_list=file_list
         )
-        
+
     def parse_ai_response(self, content: str) -> Dict[str, Any]:
         """解析AI响应内容，将字符串形式返回转化为json"""
         try:
+            if self.config.show_system_messages:
+                print(f"[系统] 解析AI响应内容: {content}")
             return json.loads(content)
         except json.JSONDecodeError:
             if self.config.show_system_messages:
                 print("无法解析 JSON 响应，可能是格式错误")
-                print(f"原始响应: {content}")
-            # 这里考虑添加手动解析？
             raise
             
     def handle_final_answer(self, response_json: Dict[str, Any]) -> str:
@@ -113,11 +108,16 @@ class ReactAgent:
             self.conversation.add_message("model", content)
             
             if self.config.show_system_messages:
-                print("Agent:", content)
+                print("[系统]模型完整回复:", content)
                 
             # 解析AI响应
-            response_json = self.parse_ai_response(content)
-            
+            try:
+                response_json = self.parse_ai_response(content)
+            except :
+                obs_msg = '{"Incorrect_answer_format": "回答解析失败，请检查回复是否为合理json格式后重新回答"}'
+                self.conversation.add_message("user", obs_msg)
+                return False
+
             if "final_answer" in response_json:
                 self.handle_final_answer(response_json)
                 return True  # 需要新的用户输入
