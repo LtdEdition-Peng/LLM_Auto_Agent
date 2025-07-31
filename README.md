@@ -17,23 +17,25 @@
 ### 核心组件
 
 ```
-├── agent.py              # 主要的 ReAct Agent 类
+├── agent.py               # 主要的 ReAct Agent 类
 ├── AgentConfig.py         # 配置管理类
 ├── ConversationManager.py # 对话管理类
 ├── Toolmanager.py         # 工具管理类
-├── tools.py              # 工具函数集合
+├── agent_tools.py         # 工具函数集合
+├── tools.py               # 系统函数
 ├── prompt_template.py     # 提示词模板
-├── runagent.py           # 运行入口
-└── little_test.py        # 简化版测试代码
+├── runagent.py            # 运行入口
+└── little_test.py         # 简化版测试代码
 ```
 
 ### 工作流程
 
 1. **用户输入** → 接收用户问题
 2. **推理阶段** → AI 分析问题并制定行动计划
-3. **行动阶段** → 执行相应的工具调用
-4. **观察阶段** → 获取工具执行结果
-5. **循环或结束** → 根据结果决定继续推理或给出最终答案
+3. **检测阶段** → AI返回格式修正（AI自行处理）
+4. **行动阶段** → 执行相应的工具调用
+5. **观察阶段** → 获取工具执行结果
+6. **循环或结束** → 根据结果决定继续推理或给出最终答案
 
 ## 安装和配置
 
@@ -42,6 +44,7 @@
 - Python 3.8+
 - Conda 环境管理器(python 相关指令会需要激活环境)
 - Google API Key
+- 需要科学上网
 
 
 ### 环境变量配置
@@ -136,7 +139,7 @@ config.show_system_messages = True
 
 ## 注意事项
 
-1. 确保 Google API Key 已正确配置
+1. 确保 Google API Key 已正确配置(对话时需要科学上网)
 2. 某些工具需要网络连接
 3. 系统命令执行需要相应权限
 4. Conda 环境需要预先配置
@@ -151,4 +154,18 @@ config.show_system_messages = True
 - **prompt_template.py**: ReAct 模式的提示词模板
 - **runagent.py**: 主要运行入口
 - **little_test.py**: 简化版本，用于快速测试
+
+## 致谢
+
+本项目的实现受到以下项目和研究的启发：
+
+- 感谢项目教程 [MarkTechStation/VideoCode](https://github.com/MarkTechStation/VideoCode)
+- 感谢 Google Gemini API 提供的强大语言模型支持
+
+
+如果您在使用本项目时发现任何问题或有改进建议，欢迎提交 Issue 或 Pull Request！
+
+## 许可证
+
+本项目基于 MIT 许可证开源，详情请参见 [LICENSE](LICENSE) 文件。
 
