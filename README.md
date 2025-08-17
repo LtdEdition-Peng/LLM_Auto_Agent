@@ -1,3 +1,7 @@
+## English Version
+
+[English README](README_EN.md)
+
 # Python ReAct Agent 自动化助手
 
 ## 项目简介
@@ -150,7 +154,8 @@ config.show_system_messages = True
 - **AgentConfig.py**: 配置管理，包含所有可调参数
 - **ConversationManager.py**: 对话历史管理
 - **Toolmanager.py**: 工具注册、解析和执行管理
-- **tools.py**: 各种实用工具函数的实现
+- **agent_tools.py**: Agent工具函数的实现
+- **_tools.py**: 系统函数实现
 - **prompt_template.py**: ReAct 模式的提示词模板
 - **runagent.py**: 主要运行入口
 - **little_test.py**: 简化版本，用于快速测试
@@ -168,4 +173,8 @@ config.show_system_messages = True
 ## 许可证
 
 本项目基于 MIT 许可证开源，详情请参见 [LICENSE](LICENSE) 文件。
+
+---
+
+
 
