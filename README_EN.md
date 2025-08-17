@@ -9,6 +9,9 @@
 
 This is an intelligent agent system based on the ReAct (Reasoning and Acting) paradigm that combines reasoning and action capabilities. The system can interact with the environment through various tools while integrating CodeAct to automatically complete complex tasks.
 
+## Implement using the Langchain framework
+
+- [LtdEdition-Peng/Langchain_Auto_Agent(GitHub)](https://github.com/LtdEdition-Peng/Langchain_Auto_Agent)
 ## Core Features
 
 - 🤖 **Intelligent Reasoning**: Smart conversation and reasoning capabilities based on Google Gemini model

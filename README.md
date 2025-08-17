@@ -8,6 +8,10 @@
 
 这是一个基于 ReAct（Reasoning and Acting）模式的智能代理系统，该系统结合了推理和行动能力，能够通过多种工具与环境交互，同时结合CodeAct自动完成复杂任务。
 
+## 使用Langchain 框架快速实现
+
+- [LtdEdition-Peng/Langchain_Auto_Agent(GitHub)](https://github.com/LtdEdition-Peng/Langchain_Auto_Agent)
+
 ## 核心特性
 
 - 🤖 **智能推理**: 基于 Google Gemini 模型的智能对话和推理能力
